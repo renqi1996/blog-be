@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { UserService } from '../user/user.service';
+import { CreateUserDto } from '../../dto/create-user.dto'
 
 @Controller('user')
 export class UserController {
@@ -11,8 +12,12 @@ export class UserController {
   }
 
   @Post('createUser')
-  createUser(@Body() body: any) {
-    return this.usersService.create(body);
+  async createUser(@Res() res, @Body() body: CreateUserDto) {
+    const newUser = await this.usersService.create(body);
+    return res.status(HttpStatus.OK).json({
+      message: "New User has been submitted successfully!",
+      post: newUser,
+    });
   }
 
   @Get('findAll')
