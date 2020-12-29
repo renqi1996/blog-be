@@ -6,16 +6,16 @@ export type UserDocument = User & Document;
 @Schema()
 export class User extends Document {
   @Prop()
-  firstName: string;
+  accountName: string;
 
   @Prop()
-  lastName: string;
+  password: string;
 
   @Prop()
-  createTime: string;
+  pwd_salt: string;
 
   @Prop()
-  updateTime: string;
+  salt: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
