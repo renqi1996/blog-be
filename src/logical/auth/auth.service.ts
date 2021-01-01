@@ -15,8 +15,8 @@ export class AuthService {
     console.log('JWT Step 2');
     const user = await this.userService.findOne(userName);
     if (user) {
-      const hashedPwd = user[0].pwd_salt;
-      const salt = user[0].salt;
+      const hashedPwd = user.pwd_salt;
+      const salt = user.salt;
       const hashPwd = encryptPwd(password, salt);
 
       if (hashPwd === hashedPwd) {
