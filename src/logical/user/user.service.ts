@@ -18,7 +18,7 @@ export class UserService {
     console.log('---------\n');
     console.log(user);
     console.log('---------\n');
-    if (user && user.length > 0) {
+    if (user) {
       throw new HttpException('用户已存在', HttpStatus.BAD_REQUEST);
     }
     const salt = makeSalt();
@@ -45,8 +45,8 @@ export class UserService {
     return this.userModel.find().exec();
   }
 
-  async findOne(accountName: string): Promise<User []> {
-    const user = await this.userModel.find({ accountName: accountName }).exec()
+  async findOne(accountName: string): Promise<User> {
+    const user = await this.userModel.findOne({ accountName: accountName }).exec();
     return user;
   }
 }

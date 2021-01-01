@@ -14,7 +14,7 @@ export class AuthService {
   async validateUser (userName: string, password: string): Promise<any> {
     console.log('JWT Step 2');
     const user = await this.userService.findOne(userName);
-    if (user && user.length > 0) {
+    if (user) {
       const hashedPwd = user[0].pwd_salt;
       const salt = user[0].salt;
       const hashPwd = encryptPwd(password, salt);
@@ -32,7 +32,7 @@ export class AuthService {
           user: null,
         };
       }
-
+    } else {
       // cannot find
       return {
         code: 3,
