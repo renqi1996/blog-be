@@ -16,7 +16,14 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalFilters(new AllExceptionsFilter());
 
-  app.enableCors();
+  const corsOptions = { 
+    origin(origin, callback) {
+      callback(null, true);
+    },
+    credentials: true
+  };
+
+  app.enableCors(corsOptions);
   await app.listen(3000);
 }
 bootstrap();
