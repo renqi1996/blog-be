@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './logical/auth/auth.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { PostModule } from './post/post.module';
+import { PostModule } from './logical/post/post.module';
 
 @Module({
   imports: [
