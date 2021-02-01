@@ -11,7 +11,7 @@ async function bootstrap() {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  // app.useGlobalInterceptors(new TransformInterceptor());
+  app.useGlobalInterceptors(new TransformInterceptor());
   app.use(logger);
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalFilters(new AllExceptionsFilter());
