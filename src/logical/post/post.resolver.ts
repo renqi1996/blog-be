@@ -9,6 +9,6 @@ export class PostResolver {
 
   @Query(returns => String)
   async find() {
-    return this.postService.getHello();
+    return 'success';
   }
 }

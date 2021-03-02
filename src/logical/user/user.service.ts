@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Model, model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from '../../../schemas/user.shemas';
+import { User, UserDocument } from '../../../schemas/user.schema';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { makeSalt, encryptPwd } from '../../utils/cryptogram';
 
@@ -15,9 +15,6 @@ export class UserService {
       throw new HttpException('两次输入的密码不一致', HttpStatus.BAD_REQUEST);
     }
     const user = await this.findOne(accountName);
-    console.log('---------\n');
-    console.log(user);
-    console.log('---------\n');
     if (user) {
       throw new HttpException('用户已存在', HttpStatus.BAD_REQUEST);
     }
@@ -30,9 +27,6 @@ export class UserService {
         pwd_salt: hashPwd,
         salt: salt,
       }
-      console.log('---------\n');
-      console.log(tempParam);
-      console.log('---------\n');
       const createdUser = new this.userModel(tempParam);
       return createdUser.save();
     } catch (e) {
