@@ -1,4 +1,3 @@
-import {} from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 
 export class PostDto {
