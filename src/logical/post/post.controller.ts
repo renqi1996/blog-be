@@ -22,4 +22,41 @@ export class PostController {
       post: Posts,
     });
   }
+
+  @Post('queryPostByID')
+  async queryPostByID(@Res() res, @Body() body: any) {
+    const Post = await this.postService.findOne(body.id);
+    return res.status(HttpStatus.OK).json({
+      message: "success",
+      post: Post,
+    });
+  }
+
+  @Post('savePost')
+  async savePost(@Res() res, @Body() body:PostDto) {
+    const newPost = await this.postService.create(body);
+    return res.status(HttpStatus.OK).json({
+      message: "post has been saved successfully!",
+      post: newPost,
+    });
+  }
+
+  @Post('modifyPost')
+  async modifyPost(@Res() res, @Body() body: { id: string, post: PostDto }) {
+    const newPost = await this.postService.update(body.id, body.post);
+    return res.status(HttpStatus.OK).json({
+      message: "Post has been modified successfully!",
+      post: newPost,
+    });
+  }
+
+  @Post('deletPost')
+  async deletePost(@Res() res, @Body() body: any) {
+    const newPost = await this.postService.delete(body.id);
+    return res.status(HttpStatus.OK).json({
+      message: "Post has been deleted successfully!",
+      post: newPost,
+    });
+  }
+
 }
